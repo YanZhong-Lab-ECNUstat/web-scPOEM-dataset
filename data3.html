@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detailed information of single-cell datasets</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c5aa0 0%, #3a7bd5 100%);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        
+        .table-container {
+            padding: 25px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            padding: 16px 20px;
+            text-align: center;
+            border-bottom: 2px solid #2c5aa0;
+            color: #2c5aa0;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+        }
+        
+        td {
+            padding: 14px 20px;
+            border-bottom: 1px solid #eaeaea;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+        
+        tr {
+            transition: all 0.2s ease;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #fafbfc;
+        }
+        
+        tr:hover {
+            background-color: #f0f7ff;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(44, 90, 160, 0.1);
+        }
+        
+        tr:hover td {
+            border-color: #c5d9f1;
+        }
+        
+        .name-cell {
+            font-weight: 700;
+            color: #2c5aa0;
+            font-size: 1rem;
+        }
+        
+        .cell-counts {
+            font-weight: 600;
+            color: #2e7d32;
+        }
+        
+        .gene-counts {
+            font-weight: 600;
+            color: #d35400;
+        }
+        
+        .peak-counts {
+            font-weight: 600;
+            color: #7b1fa2;
+        }
+        
+        .class-cell {
+            font-weight: 600;
+            color: #1565c0;
+        }
+        
+        footer {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #eaeaea;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 10px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2c5aa0;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .table-container {
+                padding: 15px;
+                overflow-x: auto;
+            }
+            
+            th, td {
+                padding: 12px 15px;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Detailed information of single-cell datasets</h1>
+            <p class="description">Tables of cell counts, gene counts, and peak counts</p>
+        </header>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Class</th>
+                        <th>Cell Name</th>
+                        <th>Cell Counts</th>
+                        <th>Gene Counts</th>
+                        <th>Peak Counts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="name-cell" rowspan="5">3_10xNeuron</td>
+                        <td class="class-cell">0</td>
+                        <td>glia cell subpopulation 1</td>
+                        <td class="cell-counts">3,849</td>
+                        <td class="gene-counts">3,000</td>
+                        <td class="peak-counts">80,866</td>
+                    </tr>
+                    <tr>
+                        <td class="class-cell">1</td>
+                        <td>glia cell subpopulation 2</td>
+                        <td class="cell-counts">1,486</td>
+                        <td class="gene-counts">3,000</td>
+                        <td class="peak-counts">80,337</td>
+                    </tr>
+                    <tr>
+                        <td class="class-cell">2</td>
+                        <td>glia cell subpopulation 3</td>
+                        <td class="cell-counts">1,132</td>
+                        <td class="gene-counts">3,000</td>
+                        <td class="peak-counts">80,150</td>
+                    </tr>
+                    <tr>
+                        <td class="class-cell">3</td>
+                        <td>glia cell subpopulation 4</td>
+                        <td class="cell-counts">866</td>
+                        <td class="gene-counts">3,000</td>
+                        <td class="peak-counts">75,501</td>
+                    </tr>
+                    <tr>
+                        <td class="class-cell">4</td>
+                        <td>glia cell subpopulation 5</td>
+                        <td class="cell-counts">701</td>
+                        <td class="gene-counts">3,000</td>
+                        <td class="peak-counts">50,483</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <footer>
+            <p>Data source: single-cell sequencing analysis results</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Cell subpopulations</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">8,034</div>
+                    <div class="stat-label">Total Cell Counts</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">367,337</div>
+                    <div class="stat-label">Total Peak Counts</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

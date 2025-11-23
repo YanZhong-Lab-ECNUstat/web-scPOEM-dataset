@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single-Cell Multi-Omics Database</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c5aa0 0%, #3a7bd5 100%);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            padding: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1500px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        th {
+            background-color: #2c5aa0;
+            color: white;
+            font-weight: 600;
+            padding: 15px 12px;
+            text-align: left;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            white-space: nowrap;
+        }
+        
+        /* 为每个表头设置固定宽度 */
+        th:nth-child(1) { width: 170px; } /* Data Name */
+        th:nth-child(2) { width: 150px; } /* Source */
+        th:nth-child(3) { width: 150px; } /* Download */
+        th:nth-child(4) { width: 300px; } /* Description */
+        th:nth-child(5) { width: 200px; } /* Related Article */
+        th:nth-child(6) { width: 150px; } /* Article Link */
+        th:nth-child(7) { width: 120px; } /* Publication Date */
+        th:nth-child(8) { width: 200px; } /* Journal */
+        
+        th:last-child {
+            border-right: none;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #eef5ff;
+        }
+        
+        .data-name {
+            font-weight: 600;
+            color: #2c5aa0;
+        }
+        
+        .source {
+            font-size: 0.9rem;
+            color: #555;
+            word-break: break-all;
+        }
+        
+        .download-link a {
+            color: #3a7bd5;
+            text-decoration: none;
+            font-size: 0.9rem;
+            word-break: break-all;
+            display: inline-block;
+        }
+        
+        .download-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .article-link a {
+            color: #3a7bd5;
+            text-decoration: none;
+            font-size: 0.9rem;
+            word-break: break-all;
+            display: inline-block;
+        }
+        
+        .article-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .description {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .related-article {
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        
+        .publication-date, .journal {
+            font-size: 0.9rem;
+        }
+        
+        .journal {
+            color: #2e7d32;
+            font-weight: 500;
+        }
+        
+        footer {
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #eaeaea;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding: 0 20px;
+        }
+        
+        .search-box {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 250px;
+        }
+        
+        .entries-info {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Single-Cell Multi-Omics Database</h1>
+            <p class="description">scRNA-seq and scATAC-seq Dataset Information</p>
+        </header>
+        
+        <div class="controls">
+            <div>
+                <input type="text" class="search-box" placeholder="Search for..." id="searchInput">
+            </div>
+            <div class="entries-info">
+                Showing <span id="entriesCount">11</span> items
+            </div>
+        </div>
+        
+        <div class="table-container">
+            <table id="datasetTable">
+                <thead>
+                    <tr>
+                        <th>Data Name</th>
+                        <th>Source</th>
+                        <th>Download</th>
+                        <th>Description</th>
+                        <th>Related Article</th>
+                        <th>Article Link</th>
+                        <th>Publication Date</th>
+                        <th>Journal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="data-name"><a href="data1.html">10xPBMC</a></td>
+                        <td class="source"><a href="https://cf.10xgenomics.com/samples/cell-arc/2.0.0/pbmc_granulocyte_sorted_10k/pbmc_granulocyte_sorted_10k_web_summary.html">10xPBMC</a></td>
+                        <td class="download-link"><a href="1_10xPBMC_paired_full_features.h5ad" download>Download Data</a></td>
+                        <td class="description">This dataset contains 10,000 peripheral blood mononuclear cells (PBMC) from a healthy 25-year-old female donor (AllCells), with granulocytes removed by cell sorting and nuclei isolated, profiled using 10x Genomics.</td>
+                        <td class="related-article">scPair: Boosting single cell multimodal analysis by leveraging implicit feature selection and single cell atlases</td>
+                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-024-53971-2" target="_blank">View Article</a></td>
+                        <td class="publication-date">15-Nov-24</td>
+                        <td class="journal">Nature Communications</td>
+                    </tr>
+                    <tr>
+                        <td class="data-name"><a href="data2.html">sciCAR</a></td>
+                        <td class="source"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE117089">NCBI GEO</a></td>
+                        <td class="download-link"><a href="2_sciCAR_paired_full_features.h5ad" download>Download Data</a></td>
+                        <td class="description">Single-cell RNA-seq and ATAC-seq data generated by sci-CAR, profiling chromatin accessibility and gene expression in HEK293T, NIH/3T3, A549 cells under DEX treatment (0, 1, 3 hours) and wild-type mouse kidney cells.</td>
+                        <td class="related-article">scPair: Boosting single cell multimodal analysis by leveraging implicit feature selection and single cell atlases</td>
+                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-024-53971-2" target="_blank">View Article</a></td>
+                        <td class="publication-date">15-Nov-24</td>
+                        <td class="journal">Nature Communications</td>
+                    </tr>
+                    <tr>
+                        <td class="data-name"><a href="data3.html">10xNeuron</a></td>
+                        <td class="source"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE184981">NCBI GEO</a></td>
+                        <td class="download-link"><a href="3_10xNeuron_paired_full_features.h5ad" download>Download Data</a></td>
+                        <td class="description">Single-cell RNA-seq and single-nucleus ATAC-seq of juvenile mouse small intestine enteric neurons and 3D neurosphere cultures. It identifies multiple transcriptional subpopulations of enteric glial cells.</td>
+                        <td class="related-article">scPair: Boosting single cell multimodal analysis by leveraging implicit feature selection and single cell atlases</td>
+                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-024-53971-2" target="_blank">View Article</a></td>
+                        <td class="publication-date">15-Nov-24</td>
+                        <td class="journal">Nature Communications</td>
+                    </tr>
+                    <tr>
+                        <td class="data-name"><a href="data4.html">SNAREseq</a></td>
+                        <td class="source"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE126074">NCBI GEO</a></td>
+                        <td class="download-link"><a href="4_SNAREseq_paired_full_features.h5ad" download>Download Data</a></td>
+                        <td class="description">This dataset uses SHARE-seq to profile 1,047 nuclei from a human cell line mixture, and 5,081 and 10,309 nuclei from neonatal and adult mouse brains, respectively.</td>
+                        <td class="related-article">scPair: Boosting single cell multimodal analysis by leveraging implicit feature selection and single cell atlases</td>
+                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-024-53971-2" target="_blank">View Article</a></td>
+                        <td class="publication-date">15-Nov-24</td>
+                        <td class="journal">Nature Communications</td>
+                    </tr>
+                    <tr>
+                        <td class="data-name"><a href="data5.html">SNAREseq-human</a></td>
+                        <td class="source"><a href="https://data.nemoarchive.org/biccn/grant/u00_zhangk/zhang/multimodal/sncell/">NEMO Archive</a></td>
+                        <td class="download-link"><a href="5_SNAREseq_human_paired_full_features.h5ad" download>Download Data</a></td>
+                        <td class="description">This dataset uses SHARE-seq to profile 1,047 nuclei from a human cell line mixture, and 5,081 and 10,310 nuclei from neonatal and adult mouse brains, respectively.</td>
+                        <td class="related-article">scPair: Boosting single cell multimodal analysis by leveraging implicit feature selection and single cell atlases</td>
+                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-024-53971-2" target="_blank">View Article</a></td>
+                        <td class="publication-date">15-Nov-24</td>
+                        <td class="journal">Nature Communications</td>
+                    </tr>
+                    <tr>
+                        <td class="data-name"><a href="data6.html">SNAREseq-marmoset</a></td>
+                        <td class="source"><a href="https://data.nemoarchive.org/biccn/grant/u00_zhangk/zhang/multimodal/sncell/">NEMO Archive</a></td>
+                        <td class="download-link"><a href="6_SNAREseq_marmoset_paired_full_features.h5ad" download>Download Data</a></td>
+                        <td class="description">This dataset uses SHARE-seq to profile 1,047 nuclei from a human cell line mixture, and 5,081 and 10,311 nuclei from neonatal and adult mouse brains, respectively.</td>
+                        <td class="related-article">scPair: Boosting single cell multimodal analysis by leveraging implicit feature selection and single cell atlases</td>
+                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-024-53971-2" target="_blank">View Article</a></td>
+                        <td class="publication-date">15-Nov-24</td>
+                        <td class="journal">Nature Communications</td>
+                    </tr>
+                    <tr>
+                        <td class="data-name"><a href="data7.html">SNAREseq-mouse</a></td>
+                        <td class="source"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE140203">NCBI GEO</a></td>
+                        <td class="download-link"><a href="7_SNAREseq_mouse_paired_full_features.h5ad" download>Download Data</a></td>
+                        <td class="description">This dataset applies SHARE-seq to adult mouse tissues (skin, brain, lung) to jointly profile chromatin accessibility and gene expression in the same cells from cell lines and mouse tissues.</td>
+                        <td class="related-article">scPair: Boosting single cell multimodal analysis by leveraging implicit feature selection and single cell atlases</td>
+                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-024-53971-2" target="_blank">View Article</a></td>
+                        <td class="publication-date">15-Nov-24</td>
+                        <td class="journal">Nature Communications</td>
+                    </tr>
+                    <!--
+                    <tr>
+                        <td class="data-name">8_PBMC_granulocyte-sorted</td>
+                        <td class="source">10x Genomics</td>
+                        <td class="download-link"><a href="8_PBMC_granulocyte-sorted_paired_full_features.h5ad" download>Download Data</a></td>
+                        <td class="description">PBMCs from a healthy 25-year-old female donor (AllCells), with granulocytes removed by cell sorting and nuclei isolated, profiled using 10x Genomics.</td>
+                        <td class="related-article">A unified computational framework for single-cell data integration with optimal transport</td>
+                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-022-35094-8" target="_blank">查看文章</a></td>
+                        <td class="publication-date">1-Dec-22</td>
+                        <td class="journal">Nature Communications</td>
+                    </tr>
+                    -->
+                    <tr>
+                        <td class="data-name"><a href="data9.html">human-bonemarrow</a></td>
+                        <td class="source"><a href="https://figshare.com/articles/dataset/multiDGD_-_processed_data_and_models/23796198/1">Figshare</a></td>
+                        <td class="download-link"><a href="9_human_bonemarrow_paired_full_features.h5ad" download>Download Data</a></td>
+                        <td class="description">Single-cell multi-omics data collected from bone marrow mononuclear cells of 12 healthy human donors.</td>
+                        <td class="related-article">multiDGD: A versatile deep generative model for multi-omics data</td>
+                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-024-53340-z" target="_blank">View Article</a></td>
+                        <td class="publication-date">20-Nov-24</td>
+                        <td class="journal">Nature Communications</td>
+                    </tr>
+                    <tr>
+                        <td class="data-name"><a href="data10.html">human-brain</a></td>
+                        <td class="source"><a href="https://figshare.com/articles/dataset/multiDGD_-_processed_data_and_models/23796198/1">Figshare</a></td>
+                        <td class="download-link"><a href="10_human_brain_paired_full_features.h5ad" download>Download Data</a></td>
+                        <td class="description">This dataset profiles single-cell chromatin accessibility and gene expression from four mid-gestation human cortical samples across 8 weeks of development.</td>
+                        <td class="related-article">multiDGD: A versatile deep generative model for multi-omics data</td>
+                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-024-53340-z" target="_blank">View Article</a></td>
+                        <td class="publication-date">20-Nov-24</td>
+                        <td class="journal">Nature Communications</td>
+                    </tr>
+                    <tr>
+                        <td class="data-name"><a href="data11.html">mouse-gastrulation</a></td>
+                        <td class="source"><a href="https://figshare.com/articles/dataset/multiDGD_-_processed_data_and_models/23796198/1">Figshare</a></td>
+                        <td class="download-link"><a href="11_mouse_gastrulation_paired_full_features.h5ad" download>Download Data</a></td>
+                        <td class="description">Single-nucleus RNA-seq and ATAC-seq of 11 mouse embryonic samples (E7.5–E8.75), including 10 wild-type and 1 T-tail knockout, processed with 10x Genomics Multiome.</td>
+                        <td class="related-article">multiDGD: A versatile deep generative model for multi-omics data</td>
+                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-024-53340-z" target="_blank">View Article</a></td>
+                        <td class="publication-date">20-Nov-24</td>
+                        <td class="journal">Nature Communications</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <footer>
+            <p>Data source: public databases and research publications | Last updated: November 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        // 添加搜索功能
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#datasetTable tbody tr');
+            let visibleCount = 0;
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+            
+            document.getElementById('entriesCount').textContent = visibleCount;
+        });
+        
+        // 添加表格排序功能
+        const headers = document.querySelectorAll('th');
+        headers.forEach((header, index) => {
+            header.style.cursor = 'pointer';
+            header.addEventListener('click', () => {
+                sortTable(index);
+            });
+        });
+        
+        function sortTable(columnIndex) {
+            const table = document.getElementById('datasetTable');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            
+            const isAscending = table.getAttribute('data-sort-order') === 'asc';
+            
+            rows.sort((a, b) => {
+                const aValue = a.cells[columnIndex].textContent.trim();
+                const bValue = b.cells[columnIndex].textContent.trim();
+                
+                // 如果是日期，转换为日期对象比较
+                if (columnIndex === 6) { // Publication Date列
+                    const aDate = parseDate(aValue);
+                    const bDate = parseDate(bValue);
+                    return isAscending ? aDate - bDate : bDate - aDate;
+                }
+                
+                // 否则按字符串比较
+                return isAscending ? 
+                    aValue.localeCompare(bValue) : 
+                    bValue.localeCompare(aValue);
+            });
+            
+            table.setAttribute('data-sort-order', isAscending ? 'desc' : 'asc');
+            
+            // 清空表格并重新添加排序后的行
+            tbody.innerHTML = '';
+            rows.forEach(row => tbody.appendChild(row));
+        }
+        
+        function parseDate(dateStr) {
+            if (!dateStr) return 0;
+            
+            const parts = dateStr.split('-');
+            if (parts.length === 3) {
+                const day = parseInt(parts[0]);
+                const month = getMonthNumber(parts[1]);
+                const year = parseInt(parts[2]);
+                return new Date(year, month, day).getTime();
+            }
+            return 0;
+        }
+        
+        function getMonthNumber(monthStr) {
+            const months = {
+                'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 
+                'May': 4, 'Jun': 5, 'Jul': 6, 'Aug': 7, 
+                'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
+            };
+            return months[monthStr] || 0;
+        }
+    </script>
+</body>
+</html>
