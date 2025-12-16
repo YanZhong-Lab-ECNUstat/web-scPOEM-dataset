@@ -32,7 +32,7 @@
             background: linear-gradient(135deg, #2c5aa0 0%, #3a7bd5 100%);
             color: white;
             padding: 25px 30px;
-            text-align: center;
+            text-align: left;
         }
         
         h1 {
@@ -44,8 +44,85 @@
         .description {
             font-size: 1.1rem;
             opacity: 0.9;
+            margin-bottom: 15px;
         }
         
+        .header-info {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            text-align: left;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .header-links {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .header-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            transition: opacity 0.2s ease;
+        }
+        
+        .header-link:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
+        .developers {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .ref-section {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-align: left;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        .ref-link {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .ref-link:hover {
+            text-decoration: underline;
+        }
+        
+        .info-line {
+            margin-bottom: 10px;
+        }
+
+        .developer-text {
+            color: white;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .header-link {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            transition: opacity 0.2s ease;
+        }
+        .header-link:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
         .table-container {
             overflow-x: auto;
             padding: 20px;
@@ -54,7 +131,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 1500px;
+            min-width: 1200px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         
@@ -70,15 +147,10 @@
             white-space: nowrap;
         }
         
-        /* 为每个表头设置固定宽度 */
-        th:nth-child(1) { width: 170px; } /* Data Name */
-        th:nth-child(2) { width: 150px; } /* Source */
-        th:nth-child(3) { width: 150px; } /* Download */
-        th:nth-child(4) { width: 300px; } /* Description */
-        th:nth-child(5) { width: 200px; } /* Related Article */
-        th:nth-child(6) { width: 150px; } /* Article Link */
-        th:nth-child(7) { width: 120px; } /* Publication Date */
-        th:nth-child(8) { width: 200px; } /* Journal */
+        th:nth-child(1) { width: 200px; }
+        th:nth-child(2) { width: 200px; }
+        th:nth-child(3) { width: 150px; }
+        th:nth-child(4) { width: 650px; }
         
         th:last-child {
             border-right: none;
@@ -103,10 +175,48 @@
             color: #2c5aa0;
         }
         
+        .data-name a {
+            color: #2c5aa0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .data-name a:hover {
+            text-decoration: underline;
+        }
+        
+        .detailed-info {
+            font-size: 0.8rem;
+            color: #3a7bd5;
+            font-weight: normal;
+            font-style: italic;
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-block;
+            transition: all 0.2s ease;
+        }
+        
+        .detailed-info:hover {
+            text-decoration: underline;
+            color: #2c5aa0;
+        }
+        
         .source {
             font-size: 0.9rem;
             color: #555;
             word-break: break-all;
+        }
+        
+        .source a {
+            color: #3a7bd5;
+            text-decoration: none;
+            word-break: break-all;
+            display: inline-block;
+        }
+        
+        .source a:hover {
+            text-decoration: underline;
         }
         
         .download-link a {
@@ -121,35 +231,201 @@
             text-decoration: underline;
         }
         
-        .article-link a {
-            color: #3a7bd5;
-            text-decoration: none;
-            font-size: 0.9rem;
-            word-break: break-all;
-            display: inline-block;
-        }
-        
-        .article-link a:hover {
-            text-decoration: underline;
-        }
-        
         .description {
             font-size: 0.9rem;
             line-height: 1.5;
         }
         
-        .related-article {
-            font-style: italic;
-            font-size: 0.9rem;
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
         }
         
-        .publication-date, .journal {
-            font-size: 0.9rem;
+        .modal-content {
+            background-color: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 1200px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
         }
         
-        .journal {
+        .close-modal {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            z-index: 1001;
+        }
+        
+        .close-modal:hover {
+            color: #333;
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, #2c5aa0 0%, #3a7bd5 100%);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+        
+        .modal-header h2 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .modal-header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        
+        .modal-table-container {
+            padding: 25px;
+            overflow-x: auto;
+        }
+        
+        .modal-table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            min-width: 800px;
+        }
+        
+        .modal-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 2px solid #2c5aa0;
+            color: #2c5aa0;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+        
+        .modal-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eaeaea;
+            text-align: center;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        
+        /* 调整列宽，为下载按钮列留出空间 */
+        .modal-table th:nth-child(1), .modal-table td:nth-child(1) { 
+            width: 12%; /* Name列 */
+        }
+        .modal-table th:nth-child(2), .modal-table td:nth-child(2) { 
+            width: 8%; /* Class列 */
+        }
+        .modal-table th:nth-child(3), .modal-table td:nth-child(3) { 
+            width: 18%; /* Cell Name列 */
+        }
+        /* Cell Counts, Gene Counts, Peak Counts 三列宽度相同 */
+        .modal-table th:nth-child(4), .modal-table td:nth-child(4), 
+        .modal-table th:nth-child(5), .modal-table td:nth-child(5), 
+        .modal-table th:nth-child(6), .modal-table td:nth-child(6) { 
+            width: 13%; 
+        }
+        /* 下载按钮列 */
+        .modal-table th:nth-child(7), .modal-table td:nth-child(7) { 
+            width: 12%; 
+        }
+        
+        .modal-table tr {
+            transition: all 0.2s ease;
+        }
+        
+        .modal-table tr:nth-child(even) {
+            background-color: #fafbfc;
+        }
+        
+        .modal-table tr:hover {
+            background-color: #f0f7ff;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(44, 90, 160, 0.1);
+        }
+        
+        .modal-table tr:hover td {
+            border-color: #c5d9f1;
+        }
+        
+        .name-cell {
+            font-weight: 700;
+            color: #2c5aa0;
+            font-size: 1rem;
+        }
+        
+        .cell-counts {
+            font-weight: 600;
             color: #2e7d32;
-            font-weight: 500;
+        }
+        
+        .gene-counts {
+            font-weight: 600;
+            color: #d35400;
+        }
+        
+        .peak-counts {
+            font-weight: 600;
+            color: #7b1fa2;
+        }
+        
+        .class-cell {
+            font-weight: 600;
+            color: #1565c0;
+        }
+        
+        .modal-footer {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #eaeaea;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2c5aa0;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 2px;
         }
         
         footer {
@@ -180,6 +456,35 @@
             color: #666;
         }
         
+        /* 行内下载按钮样式 */
+        .row-download-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .row-download-btn:hover {
+            background-color: #45a049;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .row-download-btn:active {
+            transform: translateY(0);
+        }
+        
+        .row-download-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
         @media (max-width: 768px) {
             .controls {
                 flex-direction: column;
@@ -189,14 +494,43 @@
             .search-box {
                 width: 100%;
             }
+            
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Single-Cell Multi-Omics Database</h1>
-            <p class="description">scRNA-seq and scATAC-seq Dataset Information</p>
+            <h1>scPOEM: single-cell RNA seq and single-cell ATAC seq paired Embedding Database</h1>
+            
+            <div class="description">Overview: This database presents an integrated analysis of paired scRNA-seq and scATAC-seq data by scPOEM, which generate a joint low-dimensional embedding of genes and peaks for each cell type.  Specifically,  after quality control and the selection of 3,000 highly variable genes (HVGs), heterogeneous regulatory networks, including gene–gene, peak–peak, and gene–peak interactions, were inferred using LASSO, random forest, and XGBoost, and are then jointly embedded into a low-dimensional latent space using the scPOEM R package.</div>
+            
+            <!-- 每项信息单独放在一个块级元素中，实现分行 -->
+            <div class="info-line">
+                <a href="https://cran.r-project.org/web/packages/scPOEM/index.html" class="header-link" target="_blank" rel="noopener noreferrer">R package: scPOEM</a>
+            </div>
+            <div class="info-line">
+                <a href="https://github.com/Houyt23/scPOEM" class="header-link" target="_blank" rel="noopener noreferrer">Github: scPOEM</a>
+            </div>
+            <div class="info-line">
+                <span class="developer-text">Database Developer: Yeran Chen, Youshi Chang, Yan Zhong (From East China Normal University)</span>
+            </div>
+            
+            <div class="ref-section">Ref: 
+                <br>1. <i>Controlled noise: evidence of epigenetic regulation of single-cell expression variability.</i> 
+                <br>DOI: <a href="https://doi.org/10.1093/bioinformatics/btae457" class="ref-link" target="_blank" rel="noopener noreferrer">https://doi.org/10.1093/bioinformatics/btae457</a>
+                <br>2. <i>scPOEM: robust co-embedding of peaks and genes revealing peak–gene regulation</i>
+                <br>DOI: <a href="https://doi.org/10.1093/bioinformatics/btaf483" class="ref-link" target="_blank" rel="noopener noreferrer">https://doi.org/10.1093/bioinformatics/btaf483</a>
+            </div>
         </header>
         
         <div class="controls">
@@ -204,7 +538,7 @@
                 <input type="text" class="search-box" placeholder="Search for..." id="searchInput">
             </div>
             <div class="entries-info">
-                Showing <span id="entriesCount">11</span> items
+                Showing <span id="entriesCount">13</span> items
             </div>
         </div>
         
@@ -214,126 +548,140 @@
                     <tr>
                         <th>Data Name</th>
                         <th>Source</th>
-                        <th>Download</th>
+                        <th>Detailed Information</th>
                         <th>Description</th>
-                        <th>Related Article</th>
-                        <th>Article Link</th>
-                        <th>Publication Date</th>
-                        <th>Journal</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="data-name"><a href="data1.html">10xPBMC</a></td>
+                        <td class="data-name">
+                            <a>10xPBMC</a>
+                        </td>
                         <td class="source"><a href="https://cf.10xgenomics.com/samples/cell-arc/2.0.0/pbmc_granulocyte_sorted_10k/pbmc_granulocyte_sorted_10k_web_summary.html">10xPBMC</a></td>
-                        <td class="download-link"><a href="1_10xPBMC_paired_full_features.h5ad" download>Download Data</a></td>
+                        <td class="download-link">
+                            <a href="#" class="detailed-info" data-dataset="10xPBMC">Detailed Information</a>
+                        </td>
                         <td class="description">This dataset contains 10,000 peripheral blood mononuclear cells (PBMC) from a healthy 25-year-old female donor (AllCells), with granulocytes removed by cell sorting and nuclei isolated, profiled using 10x Genomics.</td>
-                        <td class="related-article">scPair: Boosting single cell multimodal analysis by leveraging implicit feature selection and single cell atlases</td>
-                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-024-53971-2" target="_blank">View Article</a></td>
-                        <td class="publication-date">15-Nov-24</td>
-                        <td class="journal">Nature Communications</td>
                     </tr>
                     <tr>
-                        <td class="data-name"><a href="data2.html">sciCAR</a></td>
+                        <td class="data-name">
+                            <a>sciCAR</a>
+                        </td>
                         <td class="source"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE117089">NCBI GEO</a></td>
-                        <td class="download-link"><a href="2_sciCAR_paired_full_features.h5ad" download>Download Data</a></td>
+                        <td class="download-link">
+                            <a href="#" class="detailed-info" data-dataset="sciCAR">Detailed Information</a>
+                        </td>
                         <td class="description">Single-cell RNA-seq and ATAC-seq data generated by sci-CAR, profiling chromatin accessibility and gene expression in HEK293T, NIH/3T3, A549 cells under DEX treatment (0, 1, 3 hours) and wild-type mouse kidney cells.</td>
-                        <td class="related-article">scPair: Boosting single cell multimodal analysis by leveraging implicit feature selection and single cell atlases</td>
-                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-024-53971-2" target="_blank">View Article</a></td>
-                        <td class="publication-date">15-Nov-24</td>
-                        <td class="journal">Nature Communications</td>
                     </tr>
                     <tr>
-                        <td class="data-name"><a href="data3.html">10xNeuron</a></td>
+                        <td class="data-name">
+                            <a>10xNeuron</a>
+                        </td>
                         <td class="source"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE184981">NCBI GEO</a></td>
-                        <td class="download-link"><a href="3_10xNeuron_paired_full_features.h5ad" download>Download Data</a></td>
+                        <td class="download-link">
+                            <a href="#" class="detailed-info" data-dataset="10xNeuron">Detailed Information</a>
+                        </td>
                         <td class="description">Single-cell RNA-seq and single-nucleus ATAC-seq of juvenile mouse small intestine enteric neurons and 3D neurosphere cultures. It identifies multiple transcriptional subpopulations of enteric glial cells.</td>
-                        <td class="related-article">scPair: Boosting single cell multimodal analysis by leveraging implicit feature selection and single cell atlases</td>
-                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-024-53971-2" target="_blank">View Article</a></td>
-                        <td class="publication-date">15-Nov-24</td>
-                        <td class="journal">Nature Communications</td>
                     </tr>
                     <tr>
-                        <td class="data-name"><a href="data4.html">SNAREseq</a></td>
+                        <td class="data-name">
+                            <a>SNAREseq</a>
+                        </td>
                         <td class="source"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE126074">NCBI GEO</a></td>
-                        <td class="download-link"><a href="4_SNAREseq_paired_full_features.h5ad" download>Download Data</a></td>
+                        <td class="download-link">
+                            <a href="#" class="detailed-info" data-dataset="SNAREseq">Detailed Information</a>
+                        </td>
                         <td class="description">This dataset uses SHARE-seq to profile 1,047 nuclei from a human cell line mixture, and 5,081 and 10,309 nuclei from neonatal and adult mouse brains, respectively.</td>
-                        <td class="related-article">scPair: Boosting single cell multimodal analysis by leveraging implicit feature selection and single cell atlases</td>
-                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-024-53971-2" target="_blank">View Article</a></td>
-                        <td class="publication-date">15-Nov-24</td>
-                        <td class="journal">Nature Communications</td>
                     </tr>
                     <tr>
-                        <td class="data-name"><a href="data5.html">SNAREseq-human</a></td>
+                        <td class="data-name">
+                            <a>SNAREseq-human</a>
+                        </td>
                         <td class="source"><a href="https://data.nemoarchive.org/biccn/grant/u00_zhangk/zhang/multimodal/sncell/">NEMO Archive</a></td>
-                        <td class="download-link"><a href="5_SNAREseq_human_paired_full_features.h5ad" download>Download Data</a></td>
-                        <td class="description">This dataset uses SHARE-seq to profile 1,047 nuclei from a human cell line mixture, and 5,081 and 10,310 nuclei from neonatal and adult mouse brains, respectively.</td>
-                        <td class="related-article">scPair: Boosting single cell multimodal analysis by leveraging implicit feature selection and single cell atlases</td>
-                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-024-53971-2" target="_blank">View Article</a></td>
-                        <td class="publication-date">15-Nov-24</td>
-                        <td class="journal">Nature Communications</td>
+                        <td class="download-link">
+                            <a href="#" class="detailed-info" data-dataset="SNAREseq-human">Detailed Information</a>
+                        </td>
+                        <td class="description">This dataset uses SHARE-seq to profile 1,047 nuclei from a human cell line mixture, and 5,081 and 10,309 nuclei from neonatal and adult mouse brains, respectively.</td>
                     </tr>
                     <tr>
-                        <td class="data-name"><a href="data6.html">SNAREseq-marmoset</a></td>
+                        <td class="data-name">
+                            <a>SNAREseq-marmoset</a>
+                        </td>
                         <td class="source"><a href="https://data.nemoarchive.org/biccn/grant/u00_zhangk/zhang/multimodal/sncell/">NEMO Archive</a></td>
-                        <td class="download-link"><a href="6_SNAREseq_marmoset_paired_full_features.h5ad" download>Download Data</a></td>
-                        <td class="description">This dataset uses SHARE-seq to profile 1,047 nuclei from a human cell line mixture, and 5,081 and 10,311 nuclei from neonatal and adult mouse brains, respectively.</td>
-                        <td class="related-article">scPair: Boosting single cell multimodal analysis by leveraging implicit feature selection and single cell atlases</td>
-                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-024-53971-2" target="_blank">View Article</a></td>
-                        <td class="publication-date">15-Nov-24</td>
-                        <td class="journal">Nature Communications</td>
+                        <td class="download-link">
+                            <a href="#" class="detailed-info" data-dataset="SNAREseq-marmoset">Detailed Information</a>
+                        </td>
+                        <td class="description">This dataset uses SHARE-seq to profile 1,047 nuclei from a human cell line mixture, and 5,081 and 10,309 nuclei from neonatal and adult mouse brains, respectively.</td>
                     </tr>
                     <tr>
-                        <td class="data-name"><a href="data7.html">SNAREseq-mouse</a></td>
+                        <td class="data-name">
+                            <a>SNAREseq-mouse</a>
+                        </td>
                         <td class="source"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE140203">NCBI GEO</a></td>
-                        <td class="download-link"><a href="7_SNAREseq_mouse_paired_full_features.h5ad" download>Download Data</a></td>
+                        <td class="download-link">
+                            <a href="#" class="detailed-info" data-dataset="SNAREseq-mouse">Detailed Information</a>
+                        </td>
                         <td class="description">This dataset applies SHARE-seq to adult mouse tissues (skin, brain, lung) to jointly profile chromatin accessibility and gene expression in the same cells from cell lines and mouse tissues.</td>
-                        <td class="related-article">scPair: Boosting single cell multimodal analysis by leveraging implicit feature selection and single cell atlases</td>
-                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-024-53971-2" target="_blank">View Article</a></td>
-                        <td class="publication-date">15-Nov-24</td>
-                        <td class="journal">Nature Communications</td>
                     </tr>
-                    <!--
                     <tr>
-                        <td class="data-name">8_PBMC_granulocyte-sorted</td>
-                        <td class="source">10x Genomics</td>
-                        <td class="download-link"><a href="8_PBMC_granulocyte-sorted_paired_full_features.h5ad" download>Download Data</a></td>
-                        <td class="description">PBMCs from a healthy 25-year-old female donor (AllCells), with granulocytes removed by cell sorting and nuclei isolated, profiled using 10x Genomics.</td>
-                        <td class="related-article">A unified computational framework for single-cell data integration with optimal transport</td>
-                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-022-35094-8" target="_blank">查看文章</a></td>
-                        <td class="publication-date">1-Dec-22</td>
-                        <td class="journal">Nature Communications</td>
-                    </tr>
-                    -->
-                    <tr>
-                        <td class="data-name"><a href="data9.html">human-bonemarrow</a></td>
+                        <td class="data-name">
+                            <a>human-brain</a>
+                        </td>
                         <td class="source"><a href="https://figshare.com/articles/dataset/multiDGD_-_processed_data_and_models/23796198/1">Figshare</a></td>
-                        <td class="download-link"><a href="9_human_bonemarrow_paired_full_features.h5ad" download>Download Data</a></td>
-                        <td class="description">Single-cell multi-omics data collected from bone marrow mononuclear cells of 12 healthy human donors.</td>
-                        <td class="related-article">multiDGD: A versatile deep generative model for multi-omics data</td>
-                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-024-53340-z" target="_blank">View Article</a></td>
-                        <td class="publication-date">20-Nov-24</td>
-                        <td class="journal">Nature Communications</td>
-                    </tr>
-                    <tr>
-                        <td class="data-name"><a href="data10.html">human-brain</a></td>
-                        <td class="source"><a href="https://figshare.com/articles/dataset/multiDGD_-_processed_data_and_models/23796198/1">Figshare</a></td>
-                        <td class="download-link"><a href="10_human_brain_paired_full_features.h5ad" download>Download Data</a></td>
+                        <td class="download-link">
+                            <a href="#" class="detailed-info" data-dataset="human-brain">Detailed Information</a>
+                        </td>
                         <td class="description">This dataset profiles single-cell chromatin accessibility and gene expression from four mid-gestation human cortical samples across 8 weeks of development.</td>
-                        <td class="related-article">multiDGD: A versatile deep generative model for multi-omics data</td>
-                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-024-53340-z" target="_blank">View Article</a></td>
-                        <td class="publication-date">20-Nov-24</td>
-                        <td class="journal">Nature Communications</td>
                     </tr>
                     <tr>
-                        <td class="data-name"><a href="data11.html">mouse-gastrulation</a></td>
-                        <td class="source"><a href="https://figshare.com/articles/dataset/multiDGD_-_processed_data_and_models/23796198/1">Figshare</a></td>
-                        <td class="download-link"><a href="11_mouse_gastrulation_paired_full_features.h5ad" download>Download Data</a></td>
-                        <td class="description">Single-nucleus RNA-seq and ATAC-seq of 11 mouse embryonic samples (E7.5–E8.75), including 10 wild-type and 1 T-tail knockout, processed with 10x Genomics Multiome.</td>
-                        <td class="related-article">multiDGD: A versatile deep generative model for multi-omics data</td>
-                        <td class="article-link"><a href="https://doi.org/10.1038/s41467-024-53340-z" target="_blank">View Article</a></td>
-                        <td class="publication-date">20-Nov-24</td>
-                        <td class="journal">Nature Communications</td>
+                        <td class="data-name">
+                            <a>human-lung</a>
+                        </td>
+                        <td class="source"><a href="https://www.ncbi.nlm.nih.gov/geo/">NCBI GEO</a></td>
+                        <td class="download-link">
+                            <a href="#" class="detailed-info" data-dataset="human-lung">Detailed Information</a>
+                        </td>
+                        <td class="description">Nuclei were extracted directly from frozen tissue to generate a human lung single-cell multi-omics dataset, including RNA-based cell type annotation and peak-by-cell chromatin accessibility matrices. For each of the 54 cell types, the top 10,000 cell type–specific accessible sites were retained.</td>
+                    </tr>
+                    <tr>
+                        <td class="data-name">
+                            <a>human-pancreas</a>
+                        </td>
+                        <td class="source"><a href="https://www.ncbi.nlm.nih.gov/geo/">NCBI GEO</a></td>
+                        <td class="download-link">
+                            <a href="#" class="detailed-info" data-dataset="human-pancreas">Detailed Information</a>
+                        </td>
+                        <td class="description">This dataset includes single-cell RNA matrices for cell type annotation and peak-by-cell chromatin accessibility matrices for downstream analyses, with up to 800 randomly sampled cells per cell type per tissue.</td>
+                    </tr>
+                    <tr>
+                        <td class="data-name">
+                            <a>human-stomach</a>
+                        </td>
+                        <td class="source"><a href="https://www.ncbi.nlm.nih.gov/geo/">NCBI GEO</a></td>
+                        <td class="download-link">
+                            <a href="#" class="detailed-info" data-dataset="human-stomach">Detailed Information</a>
+                        </td>
+                        <td class="description">Human gastric cells were analyzed, including single-cell gene-by-cell matrices for cell type annotation and single-cell peak-by-cell matrices for downstream analyses, generated for each tissue. For each cell type, up to 800 cells were randomly sampled; if fewer than 800 cells of a given cell type were available in a tissue, all cells were retained.</td>
+                    </tr>
+                    <tr>
+                        <td class="data-name">
+                            <a>human-thymus</a>
+                        </td>
+                        <td class="source"><a href="https://www.ncbi.nlm.nih.gov/geo/">NCBI GEO</a></td>
+                        <td class="download-link">
+                            <a href="#" class="detailed-info" data-dataset="human-thymus">Detailed Information</a>
+                        </td>
+                        <td class="description">Human thymus single-cell data include gene-by-cell matrices for cell type annotation and peak-by-cell chromatin accessibility matrices for downstream analyses. For each cell type, up to 800 cells were randomly sampled per tissue, with all cells retained when fewer were available.</td>
+                    </tr>
+                    <tr>
+                        <td class="data-name">
+                            <a>multiome-object</a>
+                        </td>
+                        <td class="source"><a href=" https://zenodo.org/record/7754315">Zenodo</a></td>
+                        <td class="download-link">
+                            <a href="#" class="detailed-info" data-dataset="multiome-object">Detailed Information</a>
+                        </td>
+                        <td class="description">A mixed population of iPS and K562 cells and retinal organoids at 18 and 24 weeks, processed with the Phospho-seq Multi protocol, were profiled by whole-cell protein analysis and scATAC-seq.</td>
                     </tr>
                 </tbody>
             </table>
@@ -342,6 +690,45 @@
         <footer>
             <p>Data source: public databases and research publications | Last updated: November 2025</p>
         </footer>
+    </div>
+
+    <!-- 详细信息模态框 -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2 id="modalDatasetName">Detailed information of single-cell datasets</h2>
+                <p>
+                    <strong>Tables of cell counts, gene counts, and peak counts</strong><br>
+                    <span style="font-size:smaller;">(Note: The following information is based on dimensionality-reduced data)</span>
+                </p>
+            </div>
+            
+            <div class="modal-table-container">
+                <table class="modal-table" id="modalTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Class</th>
+                            <th>Cell Name</th>
+                            <th>Cell Counts</th>
+                            <th>Gene Counts</th>
+                            <th>Peak Counts</th>
+                            <th>Download</th> <!-- 新增下载列 -->
+                        </tr>
+                    </thead>
+                    <tbody id="modalTableBody">
+                        <!-- 表格行将在这里动态加载 -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="modal-footer">
+                <div class="stats" id="modalStats">
+                    <!-- 统计信息将在这里动态加载 -->
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -384,14 +771,7 @@
                 const aValue = a.cells[columnIndex].textContent.trim();
                 const bValue = b.cells[columnIndex].textContent.trim();
                 
-                // 如果是日期，转换为日期对象比较
-                if (columnIndex === 6) { // Publication Date列
-                    const aDate = parseDate(aValue);
-                    const bDate = parseDate(bValue);
-                    return isAscending ? aDate - bDate : bDate - aDate;
-                }
-                
-                // 否则按字符串比较
+                // 按字符串比较
                 return isAscending ? 
                     aValue.localeCompare(bValue) : 
                     bValue.localeCompare(aValue);
@@ -404,27 +784,585 @@
             rows.forEach(row => tbody.appendChild(row));
         }
         
-        function parseDate(dateStr) {
-            if (!dateStr) return 0;
+        // 获取模态框元素
+        const modal = document.getElementById('detailModal');
+        const modalDatasetName = document.getElementById('modalDatasetName');
+        const modalTableBody = document.getElementById('modalTableBody');
+        const modalStats = document.getElementById('modalStats');
+        const closeModal = document.querySelector('.close-modal');
+        
+        // 生成下载链接的函数 - 根据规律简化代码
+        function generateDownloadUrls(datasetName, classNum, cellName, baseUrl = 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc/') {
+            // 清理cellName，替换空格和特殊字符
+            const cleanCellName = cellName
+                .replace(/ and /g, '.and.')
+                .replace(/\s+/g, '.')
+                .replace(/\//g, '.')
+                .replace(/_/g, '.');
             
-            const parts = dateStr.split('-');
-            if (parts.length === 3) {
-                const day = parseInt(parts[0]);
-                const month = getMonthNumber(parts[1]);
-                const year = parseInt(parts[2]);
-                return new Date(year, month, day).getTime();
-            }
-            return 0;
+            // 根据规律生成文件名
+            const fileName = `${datasetName}_class${classNum}_${cleanCellName.replace(/\./g, '_')}.RData`;
+            
+            // 生成下载URL
+            const downloadUrl = `${baseUrl}${datasetName}_filtered_class${classNum}_${cleanCellName}.RData`;
+            
+            return { downloadUrl, fileName };
         }
         
-        function getMonthNumber(monthStr) {
-            const months = {
-                'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 
-                'May': 4, 'Jun': 5, 'Jul': 6, 'Aug': 7, 
-                'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
-            };
-            return months[monthStr] || 0;
+        // 数据集详细信息 - 为每个class添加单独的下载URL
+        const datasetDetails = {
+            '10xPBMC': {
+                title: '10xPBMC Dataset Details',
+                tableData: [
+                    { 
+                        name: '10xPBMC', 
+                        class: '1', 
+                        cellName: 'PBMC_granulocyte', 
+                        cellCounts: '2,498', 
+                        geneCounts: '3,000', 
+                        peakCounts: '131,877',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc_processed/PBMC_filtered_class1_PBMC_granulocyte.RData',
+                        fileName: '10xPBMC_class1_PBMC_granulocyte.RData'
+                    }
+                ]
+            },
+            'sciCAR': {
+                title: 'sciCAR Dataset Details',
+                tableData: [
+                    { 
+                        name: 'sciCAR', 
+                        class: '1', 
+                        cellName: '293T', 
+                        cellCounts: '720', 
+                        geneCounts: '3,000', 
+                        peakCounts: '54,164',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc_processed/sciCAR_filtered_class1_293T.RData',
+                        fileName: 'sciCAR_class1_293T.RData'
+                    },
+                    { 
+                        name: 'sciCAR', 
+                        class: '2', 
+                        cellName: 'A549', 
+                        cellCounts: '3,048', 
+                        geneCounts: '3,000', 
+                        peakCounts: '57,425',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc_processed/sciCAR_filtered_class2_A549.RData',
+                        fileName: 'sciCAR_class2_A549.RData'
+                    }
+                ]
+            },
+            '10xNeuron': {
+                title: '10xNeuron Dataset Details',
+                tableData: [
+                    { 
+                        name: '10xNeuron', 
+                        class: '1', 
+                        cellName: 'glia_cell_subpopulation_1', 
+                        cellCounts: '3,849', 
+                        geneCounts: '3,000', 
+                        peakCounts: '80,866',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc_processed/10xNeuron_filtered_class1_glia_cell_subpopulation_1.RData',
+                        fileName: '10xNeuron_class1_glia_cell_subpopulation_1.RData'
+                    },
+                    { 
+                        name: '10xNeuron', 
+                        class: '2', 
+                        cellName: 'glia_cell_subpopulation_2', 
+                        cellCounts: '1,486', 
+                        geneCounts: '3,000', 
+                        peakCounts: '80,377',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc_processed/10xNeuron_filtered_class2_glia_cell_subpopulation_2.RData',
+                        fileName: '10xNeuron_class2_glia_cell_subpopulation_2.RData'
+                    },
+                    { 
+                        name: '10xNeuron', 
+                        class: '3', 
+                        cellName: 'glia_cell_subpopulation_3', 
+                        cellCounts: '1,132', 
+                        geneCounts: '3,000', 
+                        peakCounts: '80,150',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc_processed/10xNeuron_filtered_class3_glia_cell_subpopulation_3.RData',
+                        fileName: '10xNeuron_class3_glia_cell_subpopulation_3.RData'
+                    },
+                    { 
+                        name: '10xNeuron', 
+                        class: '4', 
+                        cellName: 'glia_cell_subpopulation_4', 
+                        cellCounts: '866', 
+                        geneCounts: '3,000', 
+                        peakCounts: '75,501',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc_processed/10xNeuron_filtered_class4_glia_cell_subpopulation_4.RData',
+                        fileName: '10xNeuron_class4_glia_cell_subpopulation_4.RData'
+                    },
+                    { 
+                        name: '10xNeuron', 
+                        class: '5', 
+                        cellName: 'glia_cell_subpopulation_5', 
+                        cellCounts: '701', 
+                        geneCounts: '3,000', 
+                        peakCounts: '50,483',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc_processed/10xNeuron_filtered_class5_glia_cell_subpopulation_5.RData',
+                        fileName: '10xNeuron_class5_glia_cell_subpopulation_5.RData'
+                    }
+                ]
+            },
+            'SNAREseq': {
+                title: 'SNAREseq Dataset Details',
+                tableData: [
+                    { 
+                        name: 'SNAREseq', 
+                        class: '1', 
+                        cellName: 'Basal', 
+                        cellCounts: '3,307', 
+                        geneCounts: '2,098', 
+                        peakCounts: '2,832',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc_processed/SNAREseq_filtered_class1_Basal.RData',
+                        fileName: 'SNAREseq_class1_Basal.RData'
+                    },
+                    { 
+                        name: 'SNAREseq', 
+                        class: '2', 
+                        cellName: 'Infundibulum', 
+                        cellCounts: '1,256', 
+                        geneCounts: '2,206', 
+                        peakCounts: '2,912',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc_processed/SNAREseq_filtered_class2_Infundibulum.RData',
+                        fileName: 'SNAREseq_class2_Infundibulum.RData'
+                    },
+                    { 
+                        name: 'SNAREseq', 
+                        class: '3', 
+                        cellName: 'Spinous', 
+                        cellCounts: '1,014', 
+                        geneCounts: '2,209', 
+                        peakCounts: '3,117',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc_processed/SNAREseq_filtered_class3_Spinous.RData',
+                        fileName: 'SNAREseq_class3_Spinous.RData'
+                    }
+                ]
+            },
+            'SNAREseq-human': {
+                title: 'SNAREseq-human Dataset Details',
+                tableData: [
+                    { 
+                        name: 'SNAREseq_human', 
+                        class: '1', 
+                        cellName: 'Astro_1', 
+                        cellCounts: '2,601', 
+                        geneCounts: '3,000', 
+                        peakCounts: '19,896',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc_processed/SNAREseq_human_filtered_class1_Astro_1.RData',
+                        fileName: 'SNAREseq_human_class1_Astro_1.RData'
+                    },
+                    { 
+                        name: 'SNAREseq_human', 
+                        class: '2', 
+                        cellName: 'Astro_2', 
+                        cellCounts: '5,149', 
+                        geneCounts: '3,000', 
+                        peakCounts: '20,058',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc_processed/SNAREseq_human_filtered_class2_Astro_2.RData',
+                        fileName: 'SNAREseq_human_class2_Astro_2.RData'
+                    },
+                    { 
+                        name: 'SNAREseq_human', 
+                        class: '3', 
+                        cellName: 'L2_3_IT', 
+                        cellCounts: '5,794', 
+                        geneCounts: '3,000', 
+                        peakCounts: '28,441',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc_processed/SNAREseq_human_filtered_class3_L2_3_IT.RData',
+                        fileName: 'SNAREseq_human_class3_L2_3_IT.RData'
+                    },
+                    { 
+                        name: 'SNAREseq_human', 
+                        class: '4', 
+                        cellName: 'L5_IT_1', 
+                        cellCounts: '4,438', 
+                        geneCounts: '3,000', 
+                        peakCounts: '25,661',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc_processed/SNAREseq_human_filtered_class4_L5_IT_1.RData',
+                        fileName: 'SNAREseq_human_class4_L5_IT_1.RData'
+                    },
+                    { 
+                        name: 'SNAREseq_human', 
+                        class: '5', 
+                        cellName: 'Microglia and PVM', 
+                        cellCounts: '2,654', 
+                        geneCounts: '3,000', 
+                        peakCounts: '18,075',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc_processed/SNAREseq_human_filtered_class5_Microglia.and.PVM.RData',
+                        fileName: 'SNAREseq_human_class5_Microglia_and_PVM.RData'
+                    },
+                    { 
+                        name: 'SNAREseq_human', 
+                        class: '6', 
+                        cellName: 'Oligo_2', 
+                        cellCounts: '2,600', 
+                        geneCounts: '3,000', 
+                        peakCounts: '19,509',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc_processed/SNAREseq_human_filtered_class6_Oligo_2.RData',
+                        fileName: 'SNAREseq_human_class6_Oligo_2.RData'
+                    },
+                    { 
+                        name: 'SNAREseq_human', 
+                        class: '7', 
+                        cellName: 'OPC', 
+                        cellCounts: '5,144', 
+                        geneCounts: '3,000', 
+                        peakCounts: '22,867',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc_processed/SNAREseq_human_filtered_class7_OPC.RData',
+                        fileName: 'SNAREseq_human_class7_OPC.RData'
+                    },
+                    { 
+                        name: 'SNAREseq_human', 
+                        class: '8', 
+                        cellName: 'Pvalb_1', 
+                        cellCounts: '4,829', 
+                        geneCounts: '3,000', 
+                        peakCounts: '26,374',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc_processed/SNAREseq_human_filtered_class8_Pvalb_1.RData',
+                        fileName: 'SNAREseq_human_class8_Pvalb_1.RData'
+                    },
+                    { 
+                        name: 'SNAREseq_human', 
+                        class: '9', 
+                        cellName: 'Sst_3', 
+                        cellCounts: '2,513', 
+                        geneCounts: '3,000', 
+                        peakCounts: '23,735',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc_processed/SNAREseq_human_filtered_class9_Sst_3.RData',
+                        fileName: 'SNAREseq_human_class9_Sst_3.RData'
+                    }
+                ]
+            },
+            'SNAREseq-marmoset': {
+                title: 'SNAREseq-marmoset Dataset Details',
+                tableData: [
+                    { 
+                        name: 'SNAREseq-marmoset', 
+                        class: '1', 
+                        cellName: 'Astro_2', 
+                        cellCounts: '529', 
+                        geneCounts: '2,817', 
+                        peakCounts: '19,207',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc/SNAREseq_marmoset_filtered_class1_Astro_2.RData',
+                        fileName: 'SNAREseq_marmoset_class1_Astro_2.RData'
+                    },
+                    { 
+                        name: 'SNAREseq-marmoset', 
+                        class: '2', 
+                        cellName: 'L2_3_IT', 
+                        cellCounts: '1,286', 
+                        geneCounts: '3,038', 
+                        peakCounts: '300,008',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc/SNAREseq_marmoset_filtered_class2_L2_3_IT.RData',
+                        fileName: 'SNAREseq_marmoset_class2_L2_3_IT.RData'
+                    },
+                    { 
+                        name: 'SNAREseq-marmoset', 
+                        class: '3', 
+                        cellName: 'L5_IT_1', 
+                        cellCounts: '953', 
+                        geneCounts: '3,028', 
+                        peakCounts: '26,997',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc/SNAREseq_marmoset_filtered_class3_L5_IT_1.RData',
+                        fileName: 'SNAREseq_marmoset_class3_L5_IT_1.RData'
+                    },
+                    { 
+                        name: 'SNAREseq-marmoset', 
+                        class: '4', 
+                        cellName: 'L5_IT_2', 
+                        cellCounts: '719', 
+                        geneCounts: '3,027', 
+                        peakCounts: '27,507',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc/SNAREseq_marmoset_filtered_class4_L5_IT_2.RData',
+                        fileName: 'SNAREseq_marmoset_class4_L5_IT_2.RData'
+                    },
+                    { 
+                        name: 'SNAREseq-marmoset', 
+                        class: '5', 
+                        cellName: 'L6_IT_2', 
+                        cellCounts: '522', 
+                        geneCounts: '3,036', 
+                        peakCounts: '28,308',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc/SNAREseq_marmoset_filtered_class5_L6_IT_2.RData',
+                        fileName: 'SNAREseq_marmoset_class5_L6_IT_2.RData'
+                    },
+                    { 
+                        name: 'SNAREseq-marmoset', 
+                        class: '6', 
+                        cellName: 'Oligo_1', 
+                        cellCounts: '868', 
+                        geneCounts: '2,814', 
+                        peakCounts: '18,278',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc/SNAREseq_marmoset_filtered_class6_Oligo_1.RData',
+                        fileName: 'SNAREseq_marmoset_class6_Oligo_1.RData'
+                    },
+                    { 
+                        name: 'SNAREseq-marmoset', 
+                        class: '7', 
+                        cellName: 'Oligo_2', 
+                        cellCounts: '444', 
+                        geneCounts: '2,611', 
+                        peakCounts: '15,172',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc/SNAREseq_marmoset_filtered_class7_Oligo_2.RData',
+                        fileName: 'SNAREseq_marmoset_class7_Oligo_2.RData'
+                    }
+                ]
+            },
+            'SNAREseq-mouse': {
+                title: 'SNAREseq-mouse Dataset Details',
+                tableData: [
+                    { 
+                        name: '10xNeuron', 
+                        class: '1', 
+                        cellName: 'glia_cell_subpopulation_1', 
+                        cellCounts: '5,085', 
+                        geneCounts: '3,000', 
+                        peakCounts: '36,250',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc/SNAREseq_mouse_filtered_class1_glia_cell_subpopulation_1.RData',
+                        fileName: 'SNAREseq_mouse_class1_glia_cell_subpopulation_1.RData'
+                    },
+                    { 
+                        name: '10xNeuron', 
+                        class: '2', 
+                        cellName: 'glia_cell_subpopulation_2', 
+                        cellCounts: '902', 
+                        geneCounts: '3,000', 
+                        peakCounts: '35,181',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc/SNAREseq_mouse_filtered_class2_glia_cell_subpopulation_2.RData',
+                        fileName: 'SNAREseq_mouse_class2_glia_cell_subpopulation_2.RData'
+                    }
+                ]
+            },
+            'human-brain': {
+                title: 'Human Brain Dataset Details',
+                tableData: [
+                    { 
+                        name: 'human-brain', 
+                        class: '1', 
+                        cellName: 'nIPC/GluN1', 
+                        cellCounts: '652', 
+                        geneCounts: '2,938', 
+                        peakCounts: '23,619',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc/human_brain_filtered_class1_nIPC.GluN1.RData',
+                        fileName: 'human_brain_class1_nIPC_GluN1.RData'
+                    }
+                ]
+            },
+            'human-lung': {
+                title: 'Human Lung Dataset Details',
+                tableData: [
+                    { 
+                        name: 'human-lung', 
+                        class: '1', 
+                        cellName: 'T cells', 
+                        cellCounts: '2,500', 
+                        geneCounts: '3,000', 
+                        peakCounts: '159,850',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc/human_lung_filtered_class1_T.cells.RData',
+                        fileName: 'human_lung_class1_T_cells.RData'
+                    },
+                    { 
+                        name: 'human-lung', 
+                        class: '2', 
+                        cellName: 'Erythroid cells', 
+                        cellCounts: '1,422', 
+                        geneCounts: '3,000', 
+                        peakCounts: '125,300',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc/human_lung_filtered_class2_Erythroid.cells.RData',
+                        fileName: 'human_lung_class2_Erythroid_cells.RData'
+                    },
+                    { 
+                        name: 'human-lung', 
+                        class: '3', 
+                        cellName: 'B cells', 
+                        cellCounts: '1,086', 
+                        geneCounts: '3,000', 
+                        peakCounts: '103,238',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc/human_lung_filtered_class3_B.cells.RData',
+                        fileName: 'human_lung_class3_B_cells.RData'
+                    }
+                ]
+            },
+            'human-pancreas': {
+                title: 'Human Pancreas Dataset Details',
+                tableData: [
+                    { 
+                        name: 'human-pancreas', 
+                        class: '1', 
+                        cellName: 'Neuron Subtype 1', 
+                        cellCounts: '2,912', 
+                        geneCounts: '3,000', 
+                        peakCounts: '27,882',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc/human_pancreas_filtered_class1_Neuron.Subtype.1.RData',
+                        fileName: 'human_pancreas_class1_Neuron_Subtype_1.RData'
+                    },
+                    { 
+                        name: 'human-pancreas', 
+                        class: '2', 
+                        cellName: 'Neuron Subtype 2', 
+                        cellCounts: '1,375', 
+                        geneCounts: '3,000', 
+                        peakCounts: '132,458',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc/human_pancreas_filtered_class2_Neuron.Subtype.2.RData',
+                        fileName: 'human_pancreas_class2_Neuron_Subtype_2.RData'
+                    }
+                ]
+            },
+            'human-stomach': {
+                title: 'Human Stomach Dataset Details',
+                tableData: [
+                    { 
+                        name: 'human-stomach', 
+                        class: '1', 
+                        cellName: 'Goblet Cells', 
+                        cellCounts: '1,137', 
+                        geneCounts: '3,000', 
+                        peakCounts: '179,516',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc/human_stomach_filtered_class1_Goblet.Cells.RData',
+                        fileName: 'human_stomach_class1_Goblet_Cells.RData'
+                    }
+                ]
+            },
+            'human-thymus': {
+                title: 'Human Thymus Dataset Details',
+                tableData: [
+                    { 
+                        name: 'human-thymus', 
+                        class: '1', 
+                        cellName: 'Thymocytes', 
+                        cellCounts: '3,000', 
+                        geneCounts: '1,082', 
+                        peakCounts: '2,177',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc/human_thymus_filtered_class1_Thymocytes.RData',
+                        fileName: 'human_thymus_class1_Thymocytes.RData'
+                    }
+                ]
+            },
+            'multiome-object': {
+                title: 'Multiome Object Dataset Details',
+                tableData: [
+                    { 
+                        name: 'multiome-object', 
+                        class: '1', 
+                        cellName: 'Forebrain PCs', 
+                        cellCounts: '1,168', 
+                        geneCounts: '3,000', 
+                        peakCounts: '79,915',
+                        downloadUrl: 'https://github.com/YanZhong-Lab-ECNUstat/web-scPOEM-dataset/releases/download/sc/multiome_object_filtered_class1_Forebrain.PCs.RData',
+                        fileName: 'multiome_object_class1_Forebrain_PCs.RData'
+                    }
+                ]
+            }
+        };
+        
+        // 文件下载函数
+        function downloadFile(url, filename) {
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename || 'download.RData';
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
+        
+        // 为所有detailed-info链接添加点击事件
+        const detailLinks = document.querySelectorAll('.detailed-info');
+        detailLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const dataset = this.getAttribute('data-dataset');
+                
+                if (datasetDetails[dataset]) {
+                    const detail = datasetDetails[dataset];
+                    modalDatasetName.textContent = detail.title;
+                    
+                    // 清空表格
+                    modalTableBody.innerHTML = '';
+                    
+                    // 添加表格行，包含下载按钮
+                    detail.tableData.forEach(row => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td class="name-cell">${row.name}</td>
+                            <td class="class-cell">${row.class}</td>
+                            <td>${row.cellName}</td>
+                            <td class="cell-counts">${row.cellCounts}</td>
+                            <td class="gene-counts">${row.geneCounts}</td>
+                            <td class="peak-counts">${row.peakCounts}</td>
+                            <td>
+                                <button class="row-download-btn" 
+                                        data-url="${row.downloadUrl}" 
+                                        data-filename="${row.fileName}">
+                                    Download
+                                </button>
+                            </td>
+                        `;
+                        modalTableBody.appendChild(tr);
+                    });
+                    
+                    // 为每个行内下载按钮添加点击事件
+                    const rowDownloadBtns = document.querySelectorAll('.row-download-btn');
+                    rowDownloadBtns.forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const url = this.getAttribute('data-url');
+                            const filename = this.getAttribute('data-filename');
+                            downloadFile(url, filename);
+                        });
+                    });
+                    
+                    // 计算统计信息
+                    const subpopulations = detail.tableData.length;
+                    const totalCellCounts = detail.tableData.reduce((sum, row) => {
+                        return sum + parseInt(row.cellCounts.replace(/,/g, ''));
+                    }, 0);
+                    const totalPeakCounts = detail.tableData.reduce((sum, row) => {
+                        return sum + parseInt(row.peakCounts.replace(/,/g, ''));
+                    }, 0);
+                    
+                    // 更新统计信息
+                    modalStats.innerHTML = `
+                        <div class="stat-item">
+                            <div class="stat-value">${subpopulations}</div>
+                            <div class="stat-label">Cell subpopulations</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">${totalCellCounts.toLocaleString()}</div>
+                            <div class="stat-label">Total Cell Counts</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">${totalPeakCounts.toLocaleString()}</div>
+                            <div class="stat-label">Total Peak Counts</div>
+                        </div>
+                    `;
+                    
+                    // 显示模态框
+                    modal.style.display = 'block';
+                }
+            });
+        });
+        
+        // 关闭模态框
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+        
+        // 点击模态框外部关闭
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // ESC键关闭模态框
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.style.display === 'block') {
+                modal.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
