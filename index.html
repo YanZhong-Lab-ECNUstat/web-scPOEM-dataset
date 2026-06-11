@@ -1408,6 +1408,7 @@
             }
         });
     </script>
+
 <!-- 不蒜子统计核心脚本 -->
 <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
@@ -1419,10 +1420,11 @@
   <button onclick="document.getElementById('my-stats-box').style.display='none'" style="margin-top: 8px; padding: 4px 8px; cursor: pointer;">关闭</button>
 </div>
 
-<!-- 快捷键 Ctrl+Shift+S 调出/隐藏面板 -->
+<!-- 快捷键 Ctrl+Shift+K 调出/隐藏面板（避开截屏快捷键） -->
 <script>
 document.addEventListener('keydown', function(e) {
-  if (e.ctrlKey && e.shiftKey && e.key === 'S') {
+  // Ctrl + Shift + K
+  if (e.ctrlKey && e.shiftKey && e.key === 'K') {
     e.preventDefault();
     const box = document.getElementById('my-stats-box');
     box.style.display = box.style.display === 'none' ? 'block' : 'none';
@@ -1438,6 +1440,7 @@ function getSiteStats() {
   return { pagePV, sitePV, siteUV };
 }
 </script>
+
 </body>
 </html>
 
