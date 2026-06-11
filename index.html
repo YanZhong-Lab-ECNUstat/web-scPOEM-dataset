@@ -547,40 +547,10 @@
         }
     </style>
 </head>
-<!-- 不蒜子统计脚本（核心，必须保留） -->
-<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<!-- 隐藏的统计显示容器，默认不显示 -->
-<div id="my-stats-box" style="display: none; position: fixed; bottom: 20px; right: 20px; background: #fff; border: 1px solid #ccc; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); font-size: 14px; z-index: 999;">
-  <div>页面访问量：<span id="busuanzi_value_page_pv">加载中...</span> 次</div>
-  <div>站点访问量：<span id="busuanzi_value_site_pv">加载中...</span> 次</div>
-  <div>独立访客数：<span id="busuanzi_value_site_uv">加载中...</span> 次</div>
-  <button onclick="document.getElementById('my-stats-box').style.display='none'" style="margin-top: 8px; padding: 4px 8px; cursor: pointer;">关闭</button>
-</div>
+、
 
-<!-- 快捷键触发脚本：按 Ctrl+Shift+S 显示/隐藏统计框 -->
-<script>
-document.addEventListener('keydown', function(e) {
-  // Ctrl + Shift + S
-  if (e.ctrlKey && e.shiftKey && e.key === 'S') {
-    e.preventDefault();
-    const box = document.getElementById('my-stats-box');
-    box.style.display = (box.style.display === 'none' || box.style.display === '') ? 'block' : 'none';
-  }
-});
 
-// 控制台查看数据的函数，你可以在浏览器控制台直接调用
-function getSiteStats() {
-  const pagePV = document.getElementById('busuanzi_value_page_pv')?.innerText || '加载中';
-  const sitePV = document.getElementById('busuanzi_value_site_pv')?.innerText || '加载中';
-  const siteUV = document.getElementById('busuanzi_value_site_uv')?.innerText || '加载中';
-  console.log(`【网站统计数据】
-页面访问量（PV）：${pagePV}
-全站访问量（PV）：${sitePV}
-独立访客数（UV）：${siteUV}`);
-  return { pagePV, sitePV, siteUV };
-}
-</script>
 <body>
     <div class="container">
         <header>
@@ -1438,6 +1408,36 @@ function getSiteStats() {
             }
         });
     </script>
+<!-- 不蒜子统计核心脚本 -->
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- 隐藏的统计面板（默认不显示，在页面最底部） -->
+<div id="my-stats-box" style="display: none; position: fixed; bottom: 20px; right: 20px; background: #fff; border: 1px solid #ccc; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); font-size: 14px; z-index: 999;">
+  <div>页面访问量：<span id="busuanzi_value_page_pv">加载中...</span> 次</div>
+  <div>全站访问量：<span id="busuanzi_value_site_pv">加载中...</span> 次</div>
+  <div>独立访客数：<span id="busuanzi_value_site_uv">加载中...</span> 次</div>
+  <button onclick="document.getElementById('my-stats-box').style.display='none'" style="margin-top: 8px; padding: 4px 8px; cursor: pointer;">关闭</button>
+</div>
+
+<!-- 快捷键 Ctrl+Shift+S 调出/隐藏面板 -->
+<script>
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey && e.shiftKey && e.key === 'S') {
+    e.preventDefault();
+    const box = document.getElementById('my-stats-box');
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+  }
+});
+
+// 控制台调用：getSiteStats() 查看数据
+function getSiteStats() {
+  const pagePV = document.getElementById('busuanzi_value_page_pv')?.innerText || '加载中';
+  const sitePV = document.getElementById('busuanzi_value_site_pv')?.innerText || '加载中';
+  const siteUV = document.getElementById('busuanzi_value_site_uv')?.innerText || '加载中';
+  console.log(`【网站统计】\n页面访问量：${pagePV}\n全站访问量：${sitePV}\n独立访客数：${siteUV}`);
+  return { pagePV, sitePV, siteUV };
+}
+</script>
 </body>
 </html>
 
